@@ -3,42 +3,35 @@ const path = require('path');
 
 module.exports = {
 
-    entry: "./src/index",
+	entry: "./src/index",
 
-    resolve: {
+	resolve: {
 		extensions: ['', '.js', '.jsx']
 	},
 
 	devtool: 'source-map',
 
-    output: {
-        path: path.join(__dirname, 'dist'),
-        filename: "bundle.js"
-    },
+	output: {
+		path: path.join(__dirname, 'dist'),
+		filename: "bundle.js"
+	},
 
-    module: {
+	module: {
 
-    	preLoaders: [
-    		{
-    			test: /\.js?/, loader: "eslint-loader", exclude: /node_modules/
-    		}
-	    ],
-        loaders: [
-        	{
-	           	test: /\.jsx?/,
-			   	loaders: ['babel'],
+		preLoaders: [
+			{
+				test: /\.js?/, loader: "eslint-loader", exclude: /node_modules/
+			}
+		],
+
+		loaders: [
+			{
+				test: /\.jsx?/,
+				loaders: ['babel'],
 				include: path.join(__dirname, 'src')
 			}
-        ]
-    }
- //    ,
- //    plugins : [
-	// 	new webpack.optimize.UglifyJsPlugin({
-	// 		compress: {
-	// 			warnings: false
-	// 		}
-	// 	})
-	// ]
+		]
+	}
 
 };
 
