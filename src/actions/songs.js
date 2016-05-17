@@ -36,8 +36,6 @@ function fetchSongs() {
 					return r.json()
 				})
 				.then(json => {
-					debugger;
-					console.log('json', json);
 					dispatch(songsFetched(json));
 					resolve();
 				})
