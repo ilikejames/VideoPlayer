@@ -18,17 +18,12 @@ console.log(VideoPlayer);
 
 render((
 	<Provider store={store}>
-		<VideoPlayer/>
+		<Router history={browserHistory}>
+			<Route path="/" component={MainLayout}>
+				<IndexRoute component={VideoPlayer}/>
+				<Route path="counter" component={Counter}/>
+				<Route path="*" component={MissingPage}/>
+			</Route>
+		</Router>
 	</Provider>
 ), document.getElementById('container'));
-// render((
-//   <Router history={browserHistory}>
-
-//     <Route path="/" component={MainLayout}>
-// 		<IndexRoute component={Main}/>
-// 		<Route path="counter" component={Counter}/>
-// 		<Route path="*" component={MissingPage}/>
-//     </Route>
-
-//   </Router>
-// ), document.getElementById('container'));

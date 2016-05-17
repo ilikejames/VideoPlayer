@@ -27,7 +27,6 @@ class VideoPlayer extends Component {
 		return (
 			<div>
 				<h1>Songs</h1>
-				<h4>aBool : { '' + this.props.aBool} </h4>
 				<h4>isFetching: { '' + this.props.isFetching }</h4>
 				<h4>Length : { this.props.items.length }</h4>
 				<ul>
@@ -52,25 +51,20 @@ VideoPlayer.propTypes = {
 
 function mapStateToProps(state) {
 
-	console.log('isFetching', state.songs.isFetching);
-	//const { songs } = state;
 	const {
 		isFetching,
 		lastUpdate,
-		items,
-		aBool
-	} = state.songs || {
+		items
+	} = state.songs;/* || {
 			isFetching: false,
 			items: [],
-			lastUpdate : 0,
-			aBool : false
-		}
+			lastUpdate : 0
+		}*/
 
 	return {
 		items,
 		isFetching,
-		lastUpdate,
-		aBool
+		lastUpdate
 	}
 }
 

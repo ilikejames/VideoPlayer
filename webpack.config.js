@@ -13,7 +13,7 @@ module.exports = {
 
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: "bundle.js"
+		filename: `bundle-${process.env.NODE_ENV || 'unk'}.js`
 	},
 
 	module: {
@@ -31,7 +31,14 @@ module.exports = {
 				include: path.join(__dirname, 'src')
 			}
 		]
-	}
+	},
+
+	plugins: [
+	    new webpack.EnvironmentPlugin([
+	      'NODE_ENV',
+	      'API_HOST'
+	    ])
+	]
 
 };
 

@@ -1,50 +1,38 @@
 
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
+import fetch from 'isomorphic-fetch'
+import fetchMock from 'fetch-mock'
+import expect from 'expect'
+import simple from 'simple-mock'
 import * as actions from './songs'
-import nock from 'nock'
-import expect from 'expect';
 
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
+
 describe('songs', () => {
 
 	afterEach(() => {
-		nock.cleanAll()
+		fetchMock.restore();
 	});
 
 
 	it('Creates FETCH_SONGS_COMPLETE when fetching songs has been done', () => {
 
-		//console.log('API_HOST', process.env.API_HOST);
-
-		console.log(`${process.env.API_HOST}/src/test_data/songs_response.json`);
-
-		debugger;
-
-		nock(process.env.API_HOST + '/')
-		.get('/src/test_data/songs_response.json')
-		.reply(200, { body : [1,2,3 ] });
+		fetchMock.mock('/src/test_data/songs_response.json', [1,2,3]);
+		simple.mock(Date,'now').returnWith(1234567890);
 
 		const expectedActions = [
-			{
-				type : actions.FETCH_SONGS_INPROGRESS
-			},
-			{
-				type: actions.FETCH_SONGS_COMPLETE,
-			    items: [1,2,3],
-			    receivedAt: Date.now()
-			}
+			{ type : actions.FETCH_SONGS_INPROGRESS },
+			{ type: actions.FETCH_SONGS_COMPLETE, items: [1,2,3], receivedAt : 1234567890 }
 		];
-
 		const store = mockStore({ songs : {} });
 
 		return store.dispatch(actions.fetchSongsIfNeeded())
-			.then(() => {
-				console.log(store.getActions());
-				expect(store.getActions()).toEqual(expectedActions);
-			});
+		.then(() => {
+			expect(store.getActions()).toEqual(expectedActions);
+		});
 
 	});
 

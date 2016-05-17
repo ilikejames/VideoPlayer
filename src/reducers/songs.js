@@ -5,7 +5,6 @@ import { FETCH_SONGS, FETCH_SONGS_INPROGRESS, FETCH_SONGS_COMPLETE } from '../ac
 const defaultState = {
 	currentPlaying : null,
 	isFetching : false,
-	aBool : true,
 	items : []
 }
 

@@ -1,5 +1,4 @@
-import fetch from 'isomorphic-fetch'
-
+import 'whatwg-fetch'
 
 export const FETCH_SONGS = 'FETCH_SONGS';
 export const FETCH_SONGS_INPROGRESS = 'FETCH_SONGS_INPROGRESS';
@@ -12,6 +11,7 @@ function songsFetching() {
 	}
 }
 
+
 function songsFetched(json) {
 	return {
 	    type: FETCH_SONGS_COMPLETE,
@@ -20,21 +20,35 @@ function songsFetched(json) {
 	}
 }
 
+
 function fetchSongs() {
 
 	return dispatch => {
 
 		dispatch(songsFetching());
 
-		setTimeout(() => {
+		let p = new Promise((resolve, reject) => {
 
-			fetch(`src/test_data/songs_response.json`)
-			.then(r => r.json())
-			.then(json => {
-				dispatch(songsFetched(json))
-			});
-		}, 1000);
+			setTimeout(() => {
 
+				fetch(`/src/test_data/songs_response.json`)
+				.then(r => {
+					return r.json()
+				})
+				.then(json => {
+					debugger;
+					console.log('json', json);
+					dispatch(songsFetched(json));
+					resolve();
+				})
+				.catch(e => {
+					reject(e);
+				})
+			}, 1000);
+
+		});
+
+		return p;
 
 	}
 
@@ -48,9 +62,7 @@ function shouldFetch(state) {
 
 export function fetchSongsIfNeeded() {
   return (dispatch, getState) => {
-
   	const shouldFetch = getState().songs && !getState().songs.isFetching;
-
     if (shouldFetch) {
       return dispatch(fetchSongs());
     }
