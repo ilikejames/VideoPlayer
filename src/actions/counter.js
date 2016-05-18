@@ -29,7 +29,7 @@ export function startCounter() {
 export function toggleCounter() {
 	return (dispatch, getState) => {
 		const state = getState().counter;
-		debugger;
+
 		if(!state.isRunning) {
 			timerid = setInterval(updateTimer.bind(this, dispatch, state.value || 0), 1000);
 			dispatch({
