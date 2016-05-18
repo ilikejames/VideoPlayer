@@ -60,6 +60,7 @@ function shouldFetch(state) {
 
 export function fetchSongsIfNeeded() {
   return (dispatch, getState) => {
+  	console.log(getState());
   	const shouldFetch = getState().songs && !getState().songs.isFetching;
     if (shouldFetch) {
       return dispatch(fetchSongs());

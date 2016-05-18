@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchSongsIfNeeded } from '../actions/'
+import { fetchSongsIfNeeded, getCounterValue } from '../actions/'
 
 
 class VideoPlayer extends Component {
@@ -12,6 +12,7 @@ class VideoPlayer extends Component {
 	componentDidMount() {
 		this.props.dispatch(fetchSongsIfNeeded());
 		this.timer = setInterval(this.onTick.bind(this),3000);
+
 	}
 
 	componentWillUnMount() {
@@ -19,7 +20,7 @@ class VideoPlayer extends Component {
 	}
 
 	onTick() {
-		this.props.dispatch(fetchSongsIfNeeded());
+		//this.props.dispatch(fetchSongsIfNeeded());
 	}
 
 	render() {
@@ -55,11 +56,7 @@ function mapStateToProps(state) {
 		isFetching,
 		lastUpdate,
 		items
-	} = state.songs;/* || {
-			isFetching: false,
-			items: [],
-			lastUpdate : 0
-		}*/
+	} = state.songs;
 
 	return {
 		items,

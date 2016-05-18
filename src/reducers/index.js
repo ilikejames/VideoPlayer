@@ -1,10 +1,9 @@
 
 import { combineReducers } from 'redux';
-import songs from './songs.js';
+import songs from './songs';
+import counter from './counter';
 
-const root = combineReducers({ songs });
+export default combineReducers({ songs, counter });
 
-
-export default root;
 
 

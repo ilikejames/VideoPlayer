@@ -11,7 +11,7 @@ const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
 
-describe('songs', () => {
+describe('actions/songs', () => {
 
 	afterEach(() => {
 		fetchMock.restore();

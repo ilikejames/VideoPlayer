@@ -13,15 +13,12 @@ export default class MainLayout extends Component {
 		return (
 			<div>
 				<h1>Logo</h1>
-				<hr/>
-				<pre>{JSON.stringify(this.state.location)}</pre>
+				<nav>
+					<Link to="/" activeClassName="selected">home</Link>..
+					<Link to="/counter"  activeClassName="selected">counter</Link>..
+					<Link to="/missing"  activeClassName="selected">404</Link>
+				</nav>
 				<article>
-					<nav>
-						<Link to="/" activeClassName="selected">home</Link> |
-						<Link to="/counter"  activeClassName="selected">counter</Link> |
-						<Link to="/missing"  activeClassName="selected">missing</Link>
-					</nav>
-
 					{this.props.children}
 				</article>
 			</div>

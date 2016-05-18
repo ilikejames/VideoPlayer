@@ -4,7 +4,7 @@ import expect from 'expect';
 import { FETCH_SONGS, FETCH_SONGS_INPROGRESS, FETCH_SONGS_COMPLETE } from '../actions/';
 
 
-describe('songs', () => {
+describe('reducers/songs', () => {
 
 	it('Should return default state when no existing state', () => {
 

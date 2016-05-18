@@ -6,7 +6,7 @@ module.exports = {
 	entry: "./src/index",
 
 	resolve: {
-		extensions: ['', '.js', '.jsx']
+		extensions: ['', '.js', '.jsx'],
 	},
 
 	devtool: 'source-map',
