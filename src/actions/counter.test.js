@@ -3,8 +3,8 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import expect from 'expect'
 import sinon from 'sinon'
-
 import * as actions from './counter'
+
 
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)

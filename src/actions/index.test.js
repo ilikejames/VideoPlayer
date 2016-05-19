@@ -3,7 +3,7 @@ import expect from 'expect'
 import * as actions from './index.js'
 
 
-describe('index', () => {
+describe('actions/index', () => {
 
 	it('Should expose the action names from songs', () => {
 		expect(actions.FETCH_SONGS).toExist();

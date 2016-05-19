@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchSongsIfNeeded, getCounterValue } from '../actions/'
+import { fetchSongsIfNeeded, getCounterValue } from 'actions'
 
 
 class VideoPlayer extends Component {
@@ -12,7 +12,6 @@ class VideoPlayer extends Component {
 	componentDidMount() {
 		this.props.dispatch(fetchSongsIfNeeded());
 		this.timer = setInterval(this.onTick.bind(this),3000);
-
 	}
 
 	componentWillUnMount() {
@@ -24,7 +23,6 @@ class VideoPlayer extends Component {
 	}
 
 	render() {
-		console.log('props', this.props);
 		return (
 			<div>
 				<h1>Songs</h1>

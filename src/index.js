@@ -5,8 +5,8 @@ import configureStore from './configureStore';
 import { render } from 'react-dom';
 import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router'
 
-import { MainLayout, Main, Counter, MissingPage } from './components';
-import {VideoPlayer} from './containers';
+import { MainLayout, Main, MissingPage } from './components';
+import {VideoPlayer, CountDown} from './containers';
 
 const store = configureStore();
 
@@ -16,7 +16,7 @@ render((
 		<Router history={browserHistory}>
 			<Route path="/" component={MainLayout}>
 				<IndexRoute component={VideoPlayer}/>
-				<Route path="counter" component={Counter}/>
+				<Route path="counter" component={ CountDown }/>
 				<Route path="*" component={MissingPage}/>
 			</Route>
 		</Router>
