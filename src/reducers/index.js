@@ -1,9 +1,5 @@
 
-import { combineReducers } from 'redux';
-import songs from './songs';
-import counter from './counter';
-
-export default combineReducers({ songs, counter });
-
+export { default as songs } from './songs';
+export { default as counter } from './counter';
 
 

@@ -1,24 +1,24 @@
 
 import React, { Component } from 'react';
 import { Provider} from 'react-redux';
-import configureStore from './configureStore';
 import { render } from 'react-dom';
 import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router'
+import { FetchData, reducer as fetching } from 'redux-fetch-data';
+import {combineReducers} from 'redux';
 
-import { MainLayout, Main, MissingPage } from './components';
-import {VideoPlayer, CountDown} from './containers';
+import configureStore from './configureStore';
+import {routes} from './routes';
+import { songs, counter } from './reducers'
 
-const store = configureStore();
 
+const initialState = window && window.__INITIAL_STATE__;
+const store = configureStore(combineReducers({ fetching, songs, counter }), initialState);
 
 render((
-	<Provider store={store}>
-		<Router history={browserHistory}>
-			<Route path="/" component={MainLayout}>
-				<IndexRoute component={VideoPlayer}/>
-				<Route path="counter" component={ CountDown }/>
-				<Route path="*" component={MissingPage}/>
-			</Route>
-		</Router>
+	<Provider store={store} key="provider">
+		<Router
+			history={browserHistory}
+			render={ props => <FetchData {...props}/> }
+			routes={routes}/>
 	</Provider>
 ), document.getElementById('container'));

@@ -9,17 +9,9 @@ class VideoPlayer extends Component {
 		super(props);
 	}
 
-	componentDidMount() {
-		this.props.dispatch(fetchSongsIfNeeded());
-		this.timer = setInterval(this.onTick.bind(this),3000);
-	}
-
-	componentWillUnMount() {
-		clearInterval(this.timer);
-	}
-
-	onTick() {
-		//this.props.dispatch(fetchSongsIfNeeded());
+	static fetchData(store) {
+		console.log('fetchData');
+		return store.dispatch(fetchSongsIfNeeded());
 	}
 
 	render() {

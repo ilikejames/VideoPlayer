@@ -49,8 +49,8 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(CountDown);
-export {CountDown as CountDown};
+export default connect(mapStateToProps)(CountDown)
+export {CountDown as CountDown}	// for tests
 
 
 
