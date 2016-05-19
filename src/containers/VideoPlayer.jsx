@@ -10,7 +10,6 @@ class VideoPlayer extends Component {
 	}
 
 	static fetchData(store) {
-		console.log('fetchData');
 		return store.dispatch(fetchSongsIfNeeded());
 	}
 

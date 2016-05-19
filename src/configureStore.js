@@ -1,13 +1,17 @@
+
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
-//import rootReducer from './reducers'
-import { FetchData, reducer as fetching } from 'redux-fetch-data';
+import { reducer as fetching } from 'redux-fetch-data';
+import { combineReducers } from 'redux';
 
+import { songs, counter } from './reducers'
 
 const loggerMiddleware = createLogger()
+const initialState = window && window.__INITIAL_STATE__;
 
-export default function configureStore(reducer, initialState) {
+
+function configureStore(reducer, initialState) {
 	return createStore(
 		reducer,
 		initialState,
@@ -17,3 +21,7 @@ export default function configureStore(reducer, initialState) {
 		)
 	)
 }
+
+
+export const reducer = combineReducers({ fetching, songs, counter });
+export const store = configureStore(reducer, initialState);

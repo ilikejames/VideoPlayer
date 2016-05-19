@@ -16,10 +16,12 @@ class CountDown extends Component {
 
 	render() {
 		return (
-			<Count
-				value={ this.props.value }
-				running={ this.props.isRunning }
-				toggleCounter={ this.toggleCounter.bind(this) } />
+			<div>
+				<Count
+					value={ this.props.value }
+					running={ this.props.isRunning }
+					toggleCounter={ this.toggleCounter.bind(this) } />
+			</div>
 		)
 	}
 }
