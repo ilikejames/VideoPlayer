@@ -29,20 +29,39 @@ module.exports = function (config) {
 		],
 
 		webpack: {
+
 			devtool: 'inline-source-map',
+
 			module: {
 				loaders: [
 					{ test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel']},
-					{ test: /\.json$/, loader: 'json-loader' } //,
-				]
+					{ test: /\.json$/, loader: 'json-loader' },
+					{ test: /sinon\.js$/, loader: 'imports?define=>false,require=>false' }
+				],
+				noParse: [
+			        /node_modules\/sinon\//,
+			    ]
 			},
+
 			resolve: {
 				modulesDirectories: [
 					'src',
 					'node_modules'
 				],
+				alias: {
+			        'sinon': 'sinon/pkg/sinon'
+			    },
 				extensions: ['', '.json', '.js', '.jsx']
 			},
+
+			externals: {
+				'jsdom': 'window',
+				'cheerio': 'window',
+				'react/lib/ExecutionEnvironment': true,
+				'react/lib/ReactContext': 'window',
+		        'text-encoding': 'window'
+			},
+
 			plugins: [
 				new webpack.IgnorePlugin(/\.json$/),
 				new webpack.NoErrorsPlugin(),
