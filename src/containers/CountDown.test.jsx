@@ -17,36 +17,24 @@ const mockStore = configureMockStore(middlewares)
 
 describe('containers/<CountDown/>', () => {
 
-
-	function setup() {
-
-		const props = { }
-		const renderer = TestUtils.createRenderer()
-		renderer.render(<CountDown {...props}/>)
-		const output = renderer.getRenderOutput()
-		const count = shallowTest.findWithType(output, Count)
-
-		return {
-			output,
-			count,
-			props
-		}
-	}
-
 	it('Should render the <CountDown/> component with the correct initial properties', () => {
 
-		const { count } = setup();
+		const renderer = TestUtils.createRenderer()
+		renderer.render(<CountDown/>)
+		const output = renderer.getRenderOutput()
+		const count = shallowTest.findWithType(output, Count)
 
 		expect(count).toExist();
 		expect(count.props).toInclude({
 			value : 0,
 			running : false
 		});
+
 		expect(typeof count.props.toggleCounter).toBe('function');
 
 	});
 
-	it('Should dispatch(toggleCounter()) when child component handler called', () => {
+	it('Should dispatch(actions.toggleCounter()) when child component handler called', () => {
 
 		const store = mockStore({ counter : {}, dispatch : expect.createSpy() });
 		const spy = expect.spyOn(store, 'dispatch');
