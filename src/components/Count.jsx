@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-
+import './Count.scss'
 
 export default class Count extends Component {
 

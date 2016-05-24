@@ -30,7 +30,11 @@ module.exports = {
 				test: /\.jsx?/,
 				loaders: ['babel'],
 				include: path.join(__dirname, 'src')
-			}
+			},
+			{
+		    	test: /\.scss$/,
+		    	loaders: ['css-loader', 'sass-loader']
+		    }
 		]
 	},
 
@@ -39,7 +43,15 @@ module.exports = {
 	      'NODE_ENV',
 	      'API_HOST'
 	    ])
-	]
+	],
+
+	postcss: function() {
+	    return [
+	    	autoprefixer({
+	    		browsers: ['last 3 versions']
+    		})
+    	]
+    }
 
 };
 
