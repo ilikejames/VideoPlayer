@@ -36,7 +36,8 @@ module.exports = function (config) {
 				loaders: [
 					{ test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel']},
 					{ test: /\.json$/, loader: 'json-loader' },
-					{ test: /sinon\.js$/, loader: 'imports?define=>false,require=>false' }
+					{ test: /sinon\.js$/, loader: 'imports?define=>false,require=>false' },
+					{ test: /\.scss$/, loader : 'style!css!sass?sourceMap' }
 				],
 				noParse: [
 			        /node_modules\/sinon\//,
