@@ -1,5 +1,8 @@
-const webpack = require('webpack');
-const path = require('path');
+const webpack = require('webpack')
+const path = require('path')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const minify = process.argv.indexOf('--minify') !== -1
+const noop = require('node-noop').noop;
 
 module.exports = {
 
@@ -14,7 +17,7 @@ module.exports = {
 
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: `bundle-${process.env.NODE_ENV || 'unk'}.js`
+		filename: `bundle-${process.env.NODE_ENV || 'unk'}${ minify ? '.min' : ''},.js`
 	},
 
 	module: {
@@ -33,7 +36,7 @@ module.exports = {
 			},
 			{
 		    	test: /\.scss$/,
-		    	loader : 'style!css!sass?sourceMap'
+		    	loader: ExtractTextPlugin.extract('css!sass')
 		    }
 		]
 	},
@@ -42,7 +45,14 @@ module.exports = {
 	    new webpack.EnvironmentPlugin([
 	      'NODE_ENV',
 	      'API_HOST'
-	    ])
+	    ]),
+	    new ExtractTextPlugin('style.css', {
+            allChunks: true
+        }),
+        minify
+         ? new webpack.optimize.UglifyJsPlugin({
+	      compress: { warnings: false }
+	    }) : noop
 	],
 
 	postcss: function() {
